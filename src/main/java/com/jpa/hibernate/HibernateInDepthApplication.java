@@ -24,9 +24,11 @@ public class HibernateInDepthApplication implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {//This is the very first executed when the context starts
-        log.info("findById(10001): {}", repository.findById(10001L));
-        log.info("deleteById(10001)");
-        repository.deleteById(10001L);
-        log.info("Creating a new course: {}", repository.save(new Course("microservices in 100 steps")));
+//        log.info("findById(10001): {}", repository.findById(10001L));
+//        log.info("deleteById(10001)");
+//        repository.deleteById(10001L);
+//        log.info("Creating a new course: {}", repository.save(new Course("microservices in 100 steps")));
+        // Understanding @Transactional of EntityManager
+        repository.playWithEntityManager();
     }
 }

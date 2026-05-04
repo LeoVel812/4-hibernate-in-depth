@@ -48,4 +48,10 @@ class CourseRepositoryTests {
         assertEquals("SpringBoot in 15 Steps - Updated", course4.getName());
     }
 
+    @Test
+    @DirtiesContext // This resets the modified records in the database
+    void playWithEntityManager_test() {
+        // Understanding @Transactional
+        repository.playWithEntityManager();
+    }
 }
