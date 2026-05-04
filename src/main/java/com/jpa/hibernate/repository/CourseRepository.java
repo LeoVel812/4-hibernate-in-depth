@@ -13,6 +13,9 @@ import org.springframework.stereotype.Repository;
 public class CourseRepository {
     private final Logger log = LoggerFactory.getLogger(this.getClass());
 
+    //The persistence context keeps track of all the different entities
+    // which are changed during a specific transaction,
+    // it also keeps track of al the changes that needs to be stored back to the DB.
     @PersistenceContext
     private final EntityManager em;
 
@@ -45,13 +48,13 @@ public class CourseRepository {
         em.flush(); // sends this to the DB
 
 //        em.detach(course2); // this disengages course2 from the entity manager, course2 won't be updated
-        em.clear(); // this disengages all from the entity manager, nothing is updated in the database
+//        em.clear(); // this disengages all from the entity manager, nothing is updated in the database
 
         course1.setName("Web Services in 100 Steps - Updated");
-        em.flush(); // sends this to the DB
-
         course2.setName("Angular Js in 100 Steps - Updated");
-        em.flush(); // sends this to the DB
-
+        // gets the last value of course1(select query) and keeps it,
+        // the new value of course 1 won't be sent to the DB,
+        em.refresh(course1);
+        em.flush();// sends this to the DB
     }
 }
