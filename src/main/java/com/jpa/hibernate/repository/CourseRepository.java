@@ -37,10 +37,21 @@ public class CourseRepository {
 
     public void playWithEntityManager() {
         log.info("playWithEntityManager");
-        // this is one transaction
+
         Course course1 = new Course("Web Services in 100 Steps");
         em.persist(course1);
-        //JPA automatically updates this record, no need to call merge
+        Course course2 = new Course("Angular Js in 100 Steps");
+        em.persist(course2);
+        em.flush(); // sends this to the DB
+
+//        em.detach(course2); // this disengages course2 from the entity manager, course2 won't be updated
+        em.clear(); // this disengages all from the entity manager, nothing is updated in the database
+
         course1.setName("Web Services in 100 Steps - Updated");
+        em.flush(); // sends this to the DB
+
+        course2.setName("Angular Js in 100 Steps - Updated");
+        em.flush(); // sends this to the DB
+
     }
 }
