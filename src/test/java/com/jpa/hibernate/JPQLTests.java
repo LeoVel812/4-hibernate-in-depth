@@ -22,7 +22,7 @@ class JPQLTests {
     void getAllCoursesJPQLQuery_test() {
         // Understanding JPQL syntax
         // Course -> entity,
-        Query selectCFromCourseCQ = em.createQuery("Select c From Course c");
+        Query selectCFromCourseCQ = em.createNamedQuery("query_get_all_courses");
         List selectCFromCourseCResultList = selectCFromCourseCQ.getResultList();
         log.info("Select c From Course c: {}", selectCFromCourseCResultList);
     }
@@ -40,10 +40,11 @@ class JPQLTests {
     void getCoursesUsingWhereJPQLQueryTyped_test() {
         // Understanding JPQL syntax
         // Course -> entity,
-        String jpqlQuery = """
-                Select c From Course c \
-                Where name like '%100 Steps'""";
-        TypedQuery<Course> usingWhereQuery = em.createQuery(jpqlQuery, Course.class);
+//        String jpqlQuery = """
+//                Select c From Course c \
+//                Where name like '%100 Steps'""";
+//        TypedQuery<Course> usingWhereQuery = em.createQuery(jpqlQuery, Course.class);
+        TypedQuery<Course> usingWhereQuery = em.createNamedQuery("query_get_100_steps_courses", Course.class);
         List<Course> usingWhereQueryResultList = usingWhereQuery.getResultList();
         log.info("Select c From Course c Where name like '%100 Steps': {}", usingWhereQueryResultList);
     }
