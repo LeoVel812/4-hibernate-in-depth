@@ -33,8 +33,9 @@ public class HibernateInDepthApplication implements CommandLineRunner {
 //        log.info("Creating a new course: {}", courseRepository.save(new Course("microservices in 100 steps")));
 //         // // Understanding @Transactional of EntityManager
 //        courseRepository.playWithEntityManager();
-
-        studentRepository.saveStudentWithPassport();
-
+        //OneToOne relationship:
+//        studentRepository.saveStudentWithPassport();
+        //OneToMany relationship:
+        courseRepository.addReviewsForCourse();
     }
 }

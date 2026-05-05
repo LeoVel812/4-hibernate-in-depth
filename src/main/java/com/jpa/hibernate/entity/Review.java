@@ -3,6 +3,7 @@ package com.jpa.hibernate.entity;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
 
 @Entity
 public class Review {
@@ -12,6 +13,11 @@ public class Review {
 
     private String rating;
     private String description;
+
+    // This is the owning side of the relationship,
+    // this table will have the course_id column (fk)
+    @ManyToOne
+    private Course course;
 
     protected Review() {
     }
@@ -43,6 +49,14 @@ public class Review {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public Course getCourse() {
+        return course;
+    }
+
+    public void setCourse(Course course) {
+        this.course = course;
     }
 
     @Override

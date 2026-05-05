@@ -1,6 +1,7 @@
 package com.jpa.hibernate.repository;
 
 import com.jpa.hibernate.entity.Course;
+import com.jpa.hibernate.entity.Review;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.transaction.Transactional;
@@ -56,5 +57,26 @@ public class CourseRepository {
         // the new value of course 1 won't be sent to the DB,
         em.refresh(course1);
         em.flush();// sends this to the DB
+    }
+
+    public void addReviewsForCourse() {
+        // get course 10002
+        Course course = findById(10002L);
+        log.info("course.reviews: {}", course.getReviews());
+
+        // add 2 reviews to it
+        Review review1 = new Review("5", "Great Hands-on stuff");
+        Review review2 = new Review("4", "Hats off!");
+
+        // setting the relationship:
+        course.addReview(review1);
+        review1.setCourse(course);
+
+        course.addReview(review2);
+        review2.setCourse(course);
+
+        // save it to the DB
+        em.persist(review1);
+        em.persist(review2);
     }
 }

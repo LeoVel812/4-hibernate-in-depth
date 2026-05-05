@@ -29,9 +29,9 @@ VALUES (20003, 'Sarah', 40003);
 INSERT INTO student(id, name, passport_id)
 VALUES (20004, 'Daniela', 40004);
 
-INSERT INTO review(id, rating, description)
-VALUES (50001, '5', 'Wonderful Course');
-INSERT INTO review(id, rating, description)
-VALUES (50002, '4', 'Great Course');
-INSERT INTO review(id, rating, description)
-VALUES (50003, '3', 'Good Course');
+INSERT INTO review(id, rating, description, course_id)
+VALUES (50001, '5', 'Wonderful Course', 10004);
+INSERT INTO review(id, rating, description, course_id)
+VALUES (50002, '4', 'Great Course', 10004);
+INSERT INTO review(id, rating, description, course_id)
+VALUES (50003, '3', 'Good Course', 10002);

@@ -1,15 +1,14 @@
 package com.jpa.hibernate.entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.NamedQueries;
 import org.hibernate.annotations.NamedQuery;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @NamedQueries(value = {
@@ -22,6 +21,9 @@ public class Course {
 
     @Column(nullable = false)
     private String name;
+
+    @OneToMany(mappedBy = "course")
+    private List<Review> reviews = new ArrayList<>();
 
     @UpdateTimestamp //automatically creates this column when the record is updated
     private LocalDateTime lastUpdatedDate;
@@ -46,6 +48,26 @@ public class Course {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public List<Review> getReviews() {
+        return reviews;
+    }
+
+    public void addReview(Review review) {
+        this.reviews.add(review);
+    }
+
+    public void removeReview(Review review) {
+        this.reviews.remove(review);
+    }
+
+    public LocalDateTime getLastUpdatedDate() {
+        return lastUpdatedDate;
+    }
+
+    public LocalDateTime getCreatedDate() {
+        return createdDate;
     }
 
     @Override
