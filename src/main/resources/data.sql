@@ -10,6 +10,20 @@ INSERT INTO course(id, name, created_date, last_updated_date)
 VALUES (10005, 'Apache Kafka in 100 Steps', current_timestamp(), current_timestamp());
 INSERT INTO course(id, name, created_date, last_updated_date)
 VALUES (10006, 'TestContainers in 100 Steps', current_timestamp(), current_timestamp());
+INSERT INTO course(id, name, created_date, last_updated_date)
+VALUES (10007, 'Dummy 1', current_timestamp(), current_timestamp());
+INSERT INTO course(id, name, created_date, last_updated_date)
+VALUES (10008, 'Dummy 2', current_timestamp(), current_timestamp());
+INSERT INTO course(id, name, created_date, last_updated_date)
+VALUES (10009, 'Dummy 3', current_timestamp(), current_timestamp());
+INSERT INTO course(id, name, created_date, last_updated_date)
+VALUES (10010, 'Dummy 4', current_timestamp(), current_timestamp());
+INSERT INTO course(id, name, created_date, last_updated_date)
+VALUES (10011, 'Dummy 5', current_timestamp(), current_timestamp());
+INSERT INTO course(id, name, created_date, last_updated_date)
+VALUES (10012, 'Dummy 6', current_timestamp(), current_timestamp());
+INSERT INTO course(id, name, created_date, last_updated_date)
+VALUES (10013, 'Dummy 7', current_timestamp(), current_timestamp());
 
 INSERT INTO passport(id, number)
 VALUES (40001, 'N123401');
