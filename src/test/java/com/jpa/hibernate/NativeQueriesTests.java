@@ -18,8 +18,11 @@ class NativeQueriesTests {
     @Autowired
     EntityManager em;
 
+    // Native Queries don't support @SQLRestriction
+    // manually add the conditions,
     @Test
     void getAllCoursesSQLQuery_test() {
+//        String sqlQuery = "SELECT * FROM COURSE WHERE is_deleted=0";
         String sqlQuery = "SELECT * FROM COURSE";
         Query selectAllCoursesQuery = em.createNativeQuery(sqlQuery, Course.class);
         List selectAllResultList = selectAllCoursesQuery.getResultList();

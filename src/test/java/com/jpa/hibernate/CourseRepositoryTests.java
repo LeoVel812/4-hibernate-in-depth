@@ -39,6 +39,8 @@ class CourseRepositoryTests {
     void deleteById_test() {
         log.info("Testing deleteById");
         repository.deleteById(10005L);
+        //with soft-deletion this test will fail, because this record still exists in the DB
+        //using @SQLRestriction(@Where is deprecated) clause on Course Entity will exclude the inactive records, this test will pass again
         assertNull(repository.findById(10005L));
     }
 

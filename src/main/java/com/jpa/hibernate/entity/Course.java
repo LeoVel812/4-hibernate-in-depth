@@ -1,17 +1,12 @@
 package com.jpa.hibernate.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import jakarta.persistence.Cacheable;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.ManyToMany;
-import jakarta.persistence.OneToMany;
-import org.hibernate.annotations.CreationTimestamp;
+import jakarta.persistence.*;
+import org.hibernate.annotations.*;
 import org.hibernate.annotations.NamedQueries;
 import org.hibernate.annotations.NamedQuery;
-import org.hibernate.annotations.UpdateTimestamp;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -21,8 +16,15 @@ import java.util.List;
 @NamedQueries(value = {
         @NamedQuery(name = "query_get_all_courses", query = "Select c From Course c"),
         @NamedQuery(name = "query_get_100_steps_courses", query = "Select c From Course c Where name like '%100 Steps'")})
+// Using second level cache
 @Cacheable
+// Making soft-deletion:
+@SQLDelete(sql = "update course set is_deleted=true where id=?")
+// Excluding the inactive courses:
+//@Where(clause = "is_deleted=false")// This is deprecated
+@SQLRestriction("is_deleted <> false")
 public class Course {
+    private static final Logger log = LoggerFactory.getLogger(Course.class);
     @Id
     @GeneratedValue
     private Long id;
@@ -52,6 +54,14 @@ public class Course {
 
     @CreationTimestamp //automatically creates this column when the record is created
     private LocalDateTime createdDate;
+
+    private boolean isDeleted;
+
+    @PreRemove
+    private void preRemove() {
+        log.info("preRemove called,setting isDeleted=true");
+        this.isDeleted = true;
+    }
 
     protected Course() {
     }
