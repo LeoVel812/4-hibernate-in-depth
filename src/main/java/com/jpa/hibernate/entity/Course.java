@@ -22,6 +22,7 @@ public class Course {
     @Column(nullable = false)
     private String name;
 
+    // By default, OneToMany is Lazy fetch type
     @OneToMany(mappedBy = "course")
     private List<Review> reviews = new ArrayList<>();
 

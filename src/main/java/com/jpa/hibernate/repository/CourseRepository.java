@@ -9,6 +9,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
 @Transactional
 public class CourseRepository {
@@ -78,5 +80,20 @@ public class CourseRepository {
         // save it to the DB
         em.persist(review1);
         em.persist(review2);
+    }
+
+    public void addReviewsForCourse(Long courseId, List<Review> reviews) {
+        // get course 10002
+        Course course = findById(courseId);
+        log.info("course.reviews: {}", course.getReviews());
+        reviews.forEach(review -> {
+            // setting the relationship:
+            course.addReview(review);
+            review.setCourse(course);
+
+            // save it to the DB
+            em.persist(review);
+        });
+
     }
 }

@@ -17,6 +17,7 @@ public class Review {
     // This is the owning side of the relationship,
     // this table will have the course_id column (fk)
     @ManyToOne
+    // By default, ManyToOne is Eager fetch type
     private Course course;
 
     protected Review() {
