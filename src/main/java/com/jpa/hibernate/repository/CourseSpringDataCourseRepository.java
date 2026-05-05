@@ -3,9 +3,11 @@ package com.jpa.hibernate.repository;
 import com.jpa.hibernate.entity.Course;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 
 import java.util.List;
 
+@RepositoryRestResource(path = "courses ")
 public interface CourseSpringDataCourseRepository extends JpaRepository<Course, Long> {
     List<Course> findByName(String name);
 

@@ -1,5 +1,6 @@
 package com.jpa.hibernate.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -40,6 +41,8 @@ public class Course {
     // joinColumn - STUDENT_ID
     // inverseJoinColumn - COURSE_ID
     @ManyToMany(mappedBy = "courses")
+    // To avoid calling recursively on request
+    @JsonIgnore
     private List<Student> students = new ArrayList<>();
 
     @UpdateTimestamp //automatically creates this column when the record is updated
