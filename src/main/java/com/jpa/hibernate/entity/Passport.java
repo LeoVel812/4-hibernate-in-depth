@@ -18,7 +18,8 @@ public class Passport {
 
     // Bidirectional relationship, with no owning side, this provokes duplicated info
     // adding mappedBy, indicating the non-owning side of the relationship
-    // the entity who will map the relationship
+    // the entity who will map the relationship, and  it will not create a column for it i.e. student_id
+    // But this allows to get the owning side of the relationship and by having the passport, query its student
     @OneToOne(fetch = FetchType.LAZY, mappedBy = "passport")
     private Student student;
 

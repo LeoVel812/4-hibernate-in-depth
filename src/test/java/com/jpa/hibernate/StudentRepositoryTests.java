@@ -12,8 +12,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.DirtiesContext;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNull;
 
 @SpringBootTest(classes = HibernateInDepthApplication.class)
 class StudentRepositoryTests {
@@ -33,7 +31,7 @@ class StudentRepositoryTests {
     void retrieveStudentAndPassportDetails() {
         Student student = em.find(Student.class, 20001L);
         log.info("student: {}", student);
-//        log.info("student.passport: {}", student.getPassport());
+        log.info("student.passport: {}", student.getPassport());
     }
 
     // Understanding:
@@ -67,5 +65,13 @@ class StudentRepositoryTests {
     @Test
     void repositoryWithTransactionalAnnotation() {
         repository.severalDBOperationsWithAnnotatedRepo();
+    }
+
+    @Test
+    @Transactional
+    void retrievePassportAndAssociatedStudent() {
+        Passport passport = em.find(Passport.class, 40001L);
+        log.info("passport: {}", passport);
+        log.info("passport.student {}", passport.getStudent());
     }
 }
