@@ -1,5 +1,6 @@
 package com.jpa.hibernate;
 
+import com.jpa.hibernate.entity.Course;
 import com.jpa.hibernate.entity.Passport;
 import com.jpa.hibernate.entity.Student;
 import com.jpa.hibernate.repository.StudentRepository;
@@ -73,5 +74,21 @@ class StudentRepositoryTests {
         Passport passport = em.find(Passport.class, 40001L);
         log.info("passport: {}", passport);
         log.info("passport.student {}", passport.getStudent());
+    }
+
+    @Test
+    @Transactional
+    void retrieveStudentAndItsCourses() {
+        Student student = em.find(Student.class, 20001L);
+        log.info("student: {}", student);
+        log.info("student.courses: {}", student.getCourses());
+    }
+
+    @Test
+    @Transactional
+    void retrieveCourseAndItsStudents() {
+        Course course = em.find(Course.class, 10001L);
+        log.info("course: {}", course);
+        log.info("course.students: {}", course.getStudents());
     }
 }

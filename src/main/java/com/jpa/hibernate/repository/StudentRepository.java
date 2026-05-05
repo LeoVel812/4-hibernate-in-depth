@@ -1,5 +1,6 @@
 package com.jpa.hibernate.repository;
 
+import com.jpa.hibernate.entity.Course;
 import com.jpa.hibernate.entity.Passport;
 import com.jpa.hibernate.entity.Student;
 import jakarta.persistence.EntityManager;
@@ -66,5 +67,25 @@ public class StudentRepository {
         student.setName("Leon - Updated");
         //PersistenceContext (student++,passport++)
         //Till this point, the transaction is sent out to the DB
+    }
+
+    public void insertHardcodedStudentAndCourse() {
+        Student student = new Student("Jack");
+        Course course = new Course("K8s for Java Developers");
+        em.persist(student);
+        em.persist(course);
+
+        student.addCourse(course);
+        course.addStudent(student);
+
+        em.persist(student);//persist the owning-side of the relationship
+    }
+
+    public void insertStudentAndCourse(Student student, Course course) {
+        student.addCourse(course);
+        course.addStudent(student);
+
+        em.persist(student);//persist the owning-side of the relationship
+        em.persist(course);//persist Course entity also
     }
 }

@@ -2,6 +2,7 @@ package com.jpa.hibernate;
 
 import com.jpa.hibernate.entity.Course;
 import com.jpa.hibernate.entity.Review;
+import com.jpa.hibernate.entity.Student;
 import com.jpa.hibernate.repository.CourseRepository;
 import com.jpa.hibernate.repository.StudentRepository;
 import org.slf4j.Logger;
@@ -37,14 +38,19 @@ public class HibernateInDepthApplication implements CommandLineRunner {
 //         // // Understanding @Transactional of EntityManager
 //        courseRepository.playWithEntityManager();
 
-        //OneToOne relationship:
+        // OneToOne relationship:
 //        studentRepository.saveStudentWithPassport();
 
-        //OneToMany relationship:
-        courseRepository.addReviewsForCourse();
-        courseRepository.addReviewsForCourse(10006L,
-                List.of(new Review("5", "Wonderful hands-on stuff"),
-                        new Review("3", "Mid stuff"),
-                        new Review("4", "Gloves off!")));
+        // OneToMany relationship:
+//        courseRepository.addReviewsForCourse();
+//        courseRepository.addReviewsForCourse(10006L,
+//                List.of(new Review("5", "Wonderful hands-on stuff"),
+//                        new Review("3", "Mid stuff"),
+//                        new Review("4", "Gloves off!")));
+
+        // ManyToMany relationship:
+        studentRepository.insertHardcodedStudentAndCourse();
+        studentRepository.insertStudentAndCourse(new Student("Patricio"),
+                new Course("LLegar a la tonta Texas"));
     }
 }

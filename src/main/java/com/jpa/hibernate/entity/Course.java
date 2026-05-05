@@ -1,6 +1,11 @@
 package com.jpa.hibernate.entity;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.Id;
+import jakarta.persistence.ManyToMany;
+import jakarta.persistence.OneToMany;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.NamedQueries;
 import org.hibernate.annotations.NamedQuery;
@@ -25,6 +30,17 @@ public class Course {
     // By default, OneToMany is Lazy fetch type
     @OneToMany(mappedBy = "course")
     private List<Review> reviews = new ArrayList<>();
+
+    // By default, ManyToMany is Lazy fetch type
+    // With no mappedBy, this makes two tables of joined:
+    // plural names: student_courses(students_id,courses_id)
+    // making the Student Entity the owning side of the relationship
+    // In the owning-side, add @JoinTable and tune the relationship-table
+    // name table and col names
+    // joinColumn - STUDENT_ID
+    // inverseJoinColumn - COURSE_ID
+    @ManyToMany(mappedBy = "courses")
+    private List<Student> students = new ArrayList<>();
 
     @UpdateTimestamp //automatically creates this column when the record is updated
     private LocalDateTime lastUpdatedDate;
@@ -61,6 +77,18 @@ public class Course {
 
     public void removeReview(Review review) {
         this.reviews.remove(review);
+    }
+
+    public List<Student> getStudents() {
+        return students;
+    }
+
+    public void addStudent(Student student) {
+        this.students.add(student);
+    }
+
+    public void removeStudent(Student student) {
+        this.students.remove(student);
     }
 
     public LocalDateTime getLastUpdatedDate() {
