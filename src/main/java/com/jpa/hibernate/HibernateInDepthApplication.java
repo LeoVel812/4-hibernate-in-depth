@@ -55,7 +55,7 @@ public class HibernateInDepthApplication implements CommandLineRunner {
 //        studentRepository.insertStudentAndCourse(new Student("Patricio"),
 //                new Course("LLegar a la tonta Texas"));
 
-        // JPA Inheritance Hierarchies and Mappings
+        // JPA Inheritance Hierarchies and Mappings:
         // Inheritance strategies:
         // Single Table strategy: - if you want performance
         // Pros - very performant queries
@@ -66,19 +66,22 @@ public class HibernateInDepthApplication implements CommandLineRunner {
         // Joined Class strategy: - if you want data integrity
         // Pros - inheritors + 1 tables, not nulls, good design
         // Cons - not so performant queries, always complex queries with joins
-        employeeRepository.insert(new PartTimeEmployee("Kimberly", new BigDecimal(50)));
-        employeeRepository.insert(new PartTimeEmployee("Nataly", new BigDecimal(100)));
-        employeeRepository.insert(new FullTimeEmployee("Natael", new BigDecimal(10000)));
-        employeeRepository.insert(new FullTimeEmployee("Plumita", new BigDecimal(8000)));
-
+//        employeeRepository.insert(new PartTimeEmployee("Kimberly", new BigDecimal(50)));
+//        employeeRepository.insert(new PartTimeEmployee("Nataly", new BigDecimal(100)));
+//        employeeRepository.insert(new FullTimeEmployee("Natael", new BigDecimal(10000)));
+//        employeeRepository.insert(new FullTimeEmployee("Plumita", new BigDecimal(8000)));
+//
 //        log.info("Retrieve all employees: {}", employeeRepository.retrieveAllEmployee());
+
         //  MappedSuperClass: - not so good performance nor design
         //  there is no relationship between abstract and concrete classes
         //  abstract class is not an Entity
         // Separated tables, like there is not much in common,
-        // not a generic query to retreive all, manual joins
-        log.info("partTimeEmployees: {}", employeeRepository.retrievePartTimeEmployees());
-        log.info("fullTimeEmployees: {}", employeeRepository.retrieveFullTimeEmployees());
+        // not a generic query to retrieve all, manual joins
+//        log.info("partTimeEmployees: {}", employeeRepository.retrievePartTimeEmployees());
+//        log.info("fullTimeEmployees: {}", employeeRepository.retrieveFullTimeEmployees());
+
+        // using JPQL with the established relationships:
 
     }
 }

@@ -44,3 +44,7 @@ INSERT INTO student_course(student_id, course_id)
 VALUES (20003, 10001);
 INSERT INTO student_course(student_id, course_id)
 VALUES (20001, 10003);
+INSERT INTO student_course(student_id, course_id)
+VALUES (20002, 10003);
+INSERT INTO student_course(student_id, course_id)
+VALUES (20004, 10004);
