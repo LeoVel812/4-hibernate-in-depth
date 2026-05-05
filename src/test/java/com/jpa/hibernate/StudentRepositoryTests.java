@@ -1,5 +1,6 @@
 package com.jpa.hibernate;
 
+import com.jpa.hibernate.entity.Address;
 import com.jpa.hibernate.entity.Course;
 import com.jpa.hibernate.entity.Passport;
 import com.jpa.hibernate.entity.Student;
@@ -90,5 +91,16 @@ class StudentRepositoryTests {
         Course course = em.find(Course.class, 10001L);
         log.info("course: {}", course);
         log.info("course.students: {}", course.getStudents());
+    }
+
+    @Test
+    @Transactional
+    void setAddressDetails() {
+        Student student = em.find(Student.class, 20001L);
+        student.setAddress(new Address("line1", "line2", "CDMX"));
+        em.flush();
+        log.info("student: {}", student);
+        log.info("student.address: {}", student.getAddress());
+        log.info("student.passport: {}", student.getPassport());
     }
 }
