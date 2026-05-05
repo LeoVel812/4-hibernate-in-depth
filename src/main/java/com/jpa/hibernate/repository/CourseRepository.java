@@ -2,6 +2,7 @@ package com.jpa.hibernate.repository;
 
 import com.jpa.hibernate.entity.Course;
 import com.jpa.hibernate.entity.Review;
+import com.jpa.hibernate.entity.ReviewRating;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.transaction.Transactional;
@@ -67,8 +68,8 @@ public class CourseRepository {
         log.info("course.reviews: {}", course.getReviews());
 
         // add 2 reviews to it
-        Review review1 = new Review("5", "Great Hands-on stuff");
-        Review review2 = new Review("4", "Hats off!");
+        Review review1 = new Review(ReviewRating.FIVE, "Great Hands-on stuff");
+        Review review2 = new Review(ReviewRating.FOUR, "Hats off!");
 
         // setting the relationship:
         course.addReview(review1);

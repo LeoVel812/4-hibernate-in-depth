@@ -1,6 +1,8 @@
 package com.jpa.hibernate.entity;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
@@ -11,7 +13,11 @@ public class Review {
     @GeneratedValue
     private Long id;
 
-    private String rating;
+    // By default, this is ordinal, so in the sql inserts must be numbers
+    // it's better to be string type, it's more flexible and modifiable
+    @Enumerated(EnumType.STRING)
+    private ReviewRating rating;
+
     private String description;
 
     // This is the owning side of the relationship,
@@ -23,7 +29,7 @@ public class Review {
     protected Review() {
     }
 
-    public Review(String rating, String description) {
+    public Review(ReviewRating rating, String description) {
         this.rating = rating;
         this.description = description;
     }
@@ -36,11 +42,11 @@ public class Review {
         this.id = id;
     }
 
-    public String getRating() {
+    public ReviewRating getRating() {
         return rating;
     }
 
-    public void setRating(String rating) {
+    public void setRating(ReviewRating rating) {
         this.rating = rating;
     }
 

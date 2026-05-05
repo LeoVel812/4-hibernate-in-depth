@@ -44,11 +44,11 @@ INSERT INTO student(id, name, passport_id)
 VALUES (20004, 'Daniela', 40004);
 
 INSERT INTO review(id, rating, description, course_id)
-VALUES (50001, '5', 'Wonderful Course', 10004);
+VALUES (50001, 'FIVE', 'Wonderful Course', 10004);
 INSERT INTO review(id, rating, description, course_id)
-VALUES (50002, '4', 'Great Course', 10004);
+VALUES (50002, 'FOUR', 'Great Course', 10004);
 INSERT INTO review(id, rating, description, course_id)
-VALUES (50003, '3', 'Good Course', 10002);
+VALUES (50003, 'THREE', 'Good Course', 10002);
 
 INSERT INTO student_course(student_id, course_id)
 VALUES (20001, 10001);
