@@ -2,8 +2,10 @@ package com.jpa.hibernate.entity;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToOne;
 
 @Entity
 public class Passport {
@@ -13,6 +15,12 @@ public class Passport {
 
     @Column(nullable = false)
     private String number;
+
+    // Bidirectional relationship, with no owning side, this provokes duplicated info
+    // adding mappedBy, indicating the non-owning side of the relationship
+    // the entity who will map the relationship
+    @OneToOne(fetch = FetchType.LAZY, mappedBy = "passport")
+    private Student student;
 
     protected Passport() {
     }
@@ -31,6 +39,14 @@ public class Passport {
 
     public void setNumber(String number) {
         this.number = number;
+    }
+
+    public Student getStudent() {
+        return student;
+    }
+
+    public void setStudent(Student student) {
+        this.student = student;
     }
 
     @Override
