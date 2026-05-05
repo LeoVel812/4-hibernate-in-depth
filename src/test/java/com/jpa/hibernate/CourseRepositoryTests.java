@@ -86,4 +86,17 @@ class CourseRepositoryTests {
         Review review2 = em.find(Review.class, 50003L);
         log.info("review.course: {}", review2.getCourse());
     }
+
+    @Test
+    // In order to be cached on First Level, use @Transactional
+    // First Level Cache only is within the boundary of a SINGLE Transaction
+    @Transactional
+    void findById_firstLevelCacheDemo() {
+        // It doesn't get cached when @Transactional is not used
+        log.info("Testing findById, first level demo");
+        Course course = repository.findById(10006L);
+        log.info("First time retrieving course: {}", course);
+        Course course1 = repository.findById(10006L);
+        log.info("Second time retrieving course: {}", course1);
+    }
 }
