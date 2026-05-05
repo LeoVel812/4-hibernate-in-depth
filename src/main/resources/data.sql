@@ -10,3 +10,28 @@ INSERT INTO course(id, name, created_date, last_updated_date)
 VALUES (10005, 'Apache Kafka in 60 Steps', current_timestamp(), current_timestamp());
 INSERT INTO course(id, name, created_date, last_updated_date)
 VALUES (10006, 'TestContainers in 17 Steps', current_timestamp(), current_timestamp());
+
+INSERT INTO passport(id, number)
+VALUES (40001, 'N123401');
+INSERT INTO passport(id, number)
+VALUES (40002, 'NA34134');
+INSERT INTO passport(id, number)
+VALUES (40003, 'M134831');
+INSERT INTO passport(id, number)
+VALUES (40004, 'Z134893');
+
+INSERT INTO student(id, name, passport_id)
+VALUES (20001, 'Leon', 40001);
+INSERT INTO student(id, name, passport_id)
+VALUES (20002, 'Pepe', 40002);
+INSERT INTO student(id, name, passport_id)
+VALUES (20003, 'Sarah', 40003);
+INSERT INTO student(id, name, passport_id)
+VALUES (20004, 'Daniela', 40004);
+
+INSERT INTO review(id, rating, description)
+VALUES (50001, '5', 'Wonderful Course');
+INSERT INTO review(id, rating, description)
+VALUES (50002, '4', 'Great Course');
+INSERT INTO review(id, rating, description)
+VALUES (50003, '3', 'Good Course');
