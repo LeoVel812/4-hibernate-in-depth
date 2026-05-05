@@ -56,25 +56,29 @@ public class HibernateInDepthApplication implements CommandLineRunner {
 //                new Course("LLegar a la tonta Texas"));
 
         // JPA Inheritance Hierarchies and Mappings
-        // Nata FullTime - $10000
-        // Kimberly PartTime - $50/hour
-        employeeRepository.insert(new PartTimeEmployee("Kimberly", new BigDecimal(50)));
-        employeeRepository.insert(new FullTimeEmployee("Natael", new BigDecimal(10000)));
-
-        log.info("Retrieve all employees: {}", employeeRepository.retrieveAllEmployee());
-        // Single Table strategy:
+        // Inheritance strategies:
+        // Single Table strategy: - if you want performance
         // Pros - very performant queries
         // Cons - there will be always null cols, bad data
-        // Table Per Class strategy:
+        // Table Per Class strategy: - not so good performance nor design
         // Pros - inheritors tables, not nulls
-        // Cons - not so performant queries
-        // Joined Class strategy:
+        // Cons - not so performant queries, repeated data on both tables
+        // Joined Class strategy: - if you want data integrity
         // Pros - inheritors + 1 tables, not nulls, good design
-        // Cons - not so performant queries, always complex queries with join
-        //  MappedSuperClass:
-        // Pros - inheritors + 1 tables, not nulls, good design
-        // Cons - not so performant queries, always complex queries with join
+        // Cons - not so performant queries, always complex queries with joins
+        employeeRepository.insert(new PartTimeEmployee("Kimberly", new BigDecimal(50)));
+        employeeRepository.insert(new PartTimeEmployee("Nataly", new BigDecimal(100)));
+        employeeRepository.insert(new FullTimeEmployee("Natael", new BigDecimal(10000)));
+        employeeRepository.insert(new FullTimeEmployee("Plumita", new BigDecimal(8000)));
 
+//        log.info("Retrieve all employees: {}", employeeRepository.retrieveAllEmployee());
+        //  MappedSuperClass: - not so good performance nor design
+        //  there is no relationship between abstract and concrete classes
+        //  abstract class is not an Entity
+        // Separated tables, like there is not much in common,
+        // not a generic query to retreive all, manual joins
+        log.info("partTimeEmployees: {}", employeeRepository.retrievePartTimeEmployees());
+        log.info("fullTimeEmployees: {}", employeeRepository.retrieveFullTimeEmployees());
 
     }
 }
