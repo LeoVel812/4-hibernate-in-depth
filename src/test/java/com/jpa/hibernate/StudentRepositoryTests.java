@@ -1,5 +1,6 @@
 package com.jpa.hibernate;
 
+import com.jpa.hibernate.entity.Passport;
 import com.jpa.hibernate.entity.Student;
 import com.jpa.hibernate.repository.StudentRepository;
 import jakarta.persistence.EntityManager;
@@ -32,6 +33,39 @@ class StudentRepositoryTests {
     void retrieveStudentAndPassportDetails() {
         Student student = em.find(Student.class, 20001L);
         log.info("student: {}", student);
-        log.info("student.passport: {}", student.getPassport());
+//        log.info("student.passport: {}", student.getPassport());
+    }
+
+    // Understanding:
+    // Session & SessionFactory
+    // EntityManager & PersistenceContext
+    // Transaction
+    @Test
+    //PersistenceContext: the place where all the entities which you are operating upon are being stored, it uses the entityManager for this end
+    @Transactional
+    //with this commented, only the first statement will be executed,
+    // then it throws a LazyInitializationException: Could not initialize proxy [com.jpa.hibernate.entity.Passport#40001] - no session
+    void severalDBOperations() {
+        // DB Op 1 - Retrieve student
+        Student student = em.find(Student.class, 20001L);
+        //PersistenceContext (student)
+        // DB Op 2 - Retrieve passport
+        Passport passport = student.getPassport();
+        //PersistenceContext (student,passport)
+
+        // DB Op 3 - Update passport
+        passport.setNumber("W123456");
+        //PersistenceContext (student,passport++)
+
+        // DB Op 4 - Update student
+        student.setName("Leon - Updated");
+        //PersistenceContext (student++,passport++)
+        //Till this point, the transaction is sent out to the DB
+    }
+
+    // no use of @Transactional
+    @Test
+    void repositoryWithTransactionalAnnotation() {
+        repository.severalDBOperationsWithAnnotatedRepo();
     }
 }

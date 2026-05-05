@@ -48,4 +48,23 @@ public class StudentRepository {
         student.setPassport(passport);
         em.persist(student);
     }
+
+    public void severalDBOperationsWithAnnotatedRepo() {
+        log.info("StudentRepository with @Transactional at class level");
+        // DB Op 1 - Retrieve student
+        Student student = em.find(Student.class, 20001L);
+        //PersistenceContext (student)
+        // DB Op 2 - Retrieve passport
+        Passport passport = student.getPassport();
+        //PersistenceContext (student,passport)
+
+        // DB Op 3 - Update passport
+        passport.setNumber("W123456");
+        //PersistenceContext (student,passport++)
+
+        // DB Op 4 - Update student
+        student.setName("Leon - Updated");
+        //PersistenceContext (student++,passport++)
+        //Till this point, the transaction is sent out to the DB
+    }
 }
