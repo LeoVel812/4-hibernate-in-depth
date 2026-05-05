@@ -15,14 +15,14 @@ import java.util.List;
 @Entity
 @NamedQueries(value = {
         @NamedQuery(name = "query_get_all_courses", query = "Select c From Course c"),
+        @NamedQuery(name = "query_get_all_courses_join_fetch", query = "Select c From Course c Join Fetch c.students s"),
         @NamedQuery(name = "query_get_100_steps_courses", query = "Select c From Course c Where name like '%100 Steps'")})
 // Using second level cache
 @Cacheable
 // Making soft-deletion:
 @SQLDelete(sql = "update course set is_deleted=true where id=?")
 // Excluding the inactive courses:
-//@Where(clause = "is_deleted=false")// This is deprecated
-@SQLRestriction("is_deleted <> false")
+@SQLRestriction("is_deleted = false")
 public class Course {
     private static final Logger log = LoggerFactory.getLogger(Course.class);
     @Id
